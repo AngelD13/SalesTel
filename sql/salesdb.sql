@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS la_answer (
 /* Создаем таблицу users*/
 CREATE TABLE IF NOT EXISTS users (
 	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) UNIQUE, /* Почта */
  	login VARCHAR(20), /* логин, совпадает с логином Windows */
  	pass VARCHAR(20), /* Пароль */
  	name VARCHAR(20), /* Отображаемое имя */
@@ -46,7 +47,7 @@ VALUES (NULL, 1, 4, 'Да', NULL), (NULL, 1, 3, 'Нет', NULL), (NULL, 4, 5, '�
 (NULL, 6, 1, 'Пробуем', 'Возвращаемся на ID1');
 
 /*  Вводим пользователей */
-INSERT INTO `users`(`login`, `pass`, `name`) VALUES ('yekorotin', '', 'Евгений'), ('mobuhovskiy', '', 'Максим'), ('pgrygoryev', '', 'Павел'), ('angel', '', 'Евгений');
+INSERT INTO `users`(`login`, `pass`, `name`) VALUES ('yekorotin', '', 'Евгений'), ('mobuhovskiy', '', 'Максим'), ('pgrygoryev', '', 'Павел'), ('angel', '', 'Евгений'), ('root', '', 'Admin');
 
 
 

@@ -11,7 +11,7 @@ require_once 'form/form.answer.php';
 if (isset($_GET['doNe']));
 if (isset($_GET['doEnd']))
 	{
-		header('Location: http://localhost/test/index.php');
+		header('Location: index.php');
   		exit;
 	}
 
