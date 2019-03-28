@@ -11,7 +11,7 @@
 		$pass = $_POST['pass'];
 		
 		// Формируем и отсылаем SQL запрос:
-		$query = "";
+		// $query = "";
 		$stmt = $pdo->query("SELECT * FROM users WHERE login='".$login."' AND pass='".$pass."'");
 		
 		// Преобразуем ответ из БД в нормальный массив PHP:
@@ -19,16 +19,19 @@
 		
 		if (!empty($user)) {
 			// Пользователь прошел авторизацию
-			header("Location: index.php?nameses=$login");
+			echo "Вы успешно аторизированы ".$_POST['login'];
+			header("refresh: 3; url=http://localhost/SalesTel/index.php");
   			exit;
 		} else {
 			// Пользователь неверно ввел логыин или пароль
-			echo "Вы не правильно ввели данные, или являетесь незарегистрированным пользователем";
-			header('refresh:1; Location: login.php');
+			echo "Вы не правильно ввели данные, или являетесь незарегистрированным пользователем. Попробуйте еще раз.";
+			header("refresh: 3; url=http://localhost/SalesTel/login.php");
   			exit;
 		}
 	}
 ?>
+
+<!-- Форма входа-->
 <form action="" method="POST">
 	Введите имя: <input name="login">
 	Введите пароль: <input name="pass" type="password">
