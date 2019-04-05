@@ -1,26 +1,31 @@
 <?php
-require_once 'form/form.header.php';
-?>
-<h1>
-	<a href="login.php">Вход</a>
-</h1>
-</br>
-<h1>
-	<a href="register.php">Регистрация</a>
-</h1>
-</br>
-<p>
-	<a href="page.php">Начинаем продажи</a>
-</p>
+	require_once 'form/form.header.php';
+	session_start();
+	//isset($_GET['msg']) ? $_GET['msg'] : '';
 
-<br/>
-<?php 
-//isset($_GET['msg']) ? $_GET['msg'] : '';
-
-//$username = get_current_user();
-//echo $username;
-if (isset($_POST['login'])) echo "Рады вашему посещению ".$_POST['login'];
+	//$username = get_current_user();
+	//echo $username;
+	if (isset($_SESSION['auth']))
+	{
+		echo "Рады вашему посещению ".$_SESSION['login'];
+		echo "<div>";
+		echo "<a href=\"page.php\">Начинаем продажи</a>";
+		echo "</div>";
+		echo "<div>";
+		echo "<a href=\"logout.php\">Выход</a>";
+		echo "</div>";
 
 
-require_once 'form/form.footer.php';
+
+
+	} else {
+		echo "<div>";
+		echo "<a href=\"login.php\">Вход на сайт</a>";
+		echo "</div>";
+		echo "<div>";
+		echo "<a href=\"register.php\">Регистрация</a>";
+		echo "</div>";
+	}
+
+	require_once 'form/form.footer.php';
 ?>

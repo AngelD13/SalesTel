@@ -44,7 +44,7 @@ VALUES (NULL, '%s добрый день! Делаем звонок?', '%s имя
 INSERT INTO `salestel`.`la_answer` (`id`, `id_question`, `id_next_question`, `answer`, `meta`)
 VALUES (NULL, 1, 4, 'Да', NULL), (NULL, 1, 3, 'Нет', NULL), (NULL, 4, 5, 'Дозвонился?', 'Ничего интересного'),
 (NULL, 4, 6, 'Не туда попал', 'Ничего интересного'), (NULL, 5, NULL, 'Если секретарь, спроси директора' , 'Будем сохранять данные директора, если есть'),
-(NULL, 6, 1, 'Пробуем', 'Возвращаемся на ID1');
+(NULL, 6, 1, 'Пробуем', 'Возвращаемся на ID1'), (NULL, 3, NULL, 'Зря ты так', 'Последняя ветка');
 
 /*  Вводим пользователей */
 INSERT INTO `users`(`login`, `pass`, `name`, `email`) VALUES ('yekorotin', '12345678', 'Евгений', 'yekorotin@ukrtelecom.ua'), 

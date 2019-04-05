@@ -5,7 +5,7 @@ require_once 'src/function.bd.php';
 <div class="divA">
   <p>
     <?php
-      if (!$_GET['doNe']) {
+      if (!@$_GET['doNe']) {
         $id = 1;
       } else {
         $id = $_GET['doNe'];

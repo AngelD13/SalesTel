@@ -1,4 +1,6 @@
 <?php
+	require_once 'form/form.header.php';
+	session_start();
 	// Тут выполняется подключение к базе данных
 	$pdo = new PDO('mysql:host=localhost;dbname=salestel;charset=utf8', 'root', '');
 	$pdo->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -20,6 +22,8 @@
 		if (!empty($user)) {
 			// Пользователь прошел авторизацию
 			echo "Вы успешно аторизированы ".$_POST['login'];
+			$_SESSION['auth'] = true;
+			$_SESSION['login'] = $login;
 			header("refresh: 3; url=http://localhost/SalesTel/index.php");
   			exit;
 		} else {
@@ -32,8 +36,25 @@
 ?>
 
 <!-- Форма входа-->
-<form action="" method="POST">
-	Введите имя: <input name="login">
-	Введите пароль: <input name="pass" type="password">
-	<input type="submit" value="Отправить">
-</form>
+<div class="container">
+	<section>
+
+		<form action="" method="POST">
+			<h1>Форма входа</h1>
+			<div>
+					<input type="text" placeholder="Username" required="" id="username" name="login" />
+			</div>
+			<div>
+					<input type="password" placeholder="Password" required="" id="password" name="pass" />
+			</div>
+			<div>
+				<input type="submit" value="Отправить">
+			</div>
+		</form>
+
+	</section>
+</div>
+
+<?php
+	require_once 'form/form.footer.php';
+?>
