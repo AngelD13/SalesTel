@@ -19,7 +19,9 @@ if (isset($_SESSION['auth']))
 
 echo "</div>";
 } else {
+	echo "<div>";
 	echo "У вас нет прав на просмотр даннойстраницы. ";
+	echo "</div>";
 
 }
 

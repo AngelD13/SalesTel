@@ -1,11 +1,11 @@
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
+del, dfn, em, form, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
+fieldset, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
@@ -114,16 +114,47 @@ body {
     display: inline-block;
 }
 
- .container {
-    width: 50%;
+/* Login 
+
+*/
+.divLog {
+    width: 25%;
     height: 50%;
     padding: 10px;
     padding-right: 20px;
-    outline: 2px solid #000;
-    border: solid 2px black;
+    border: solid 1px #1E90FF;
+    border-radius: 0 10px;
     margin: 10px auto;
     font: 16pt/14pt sans-serif;
 }
-.container.H1 {
-    font: 18pt/16pt sans-serif;
+
+.divLog .h1 {
+    font: 20pt/18pt sans-serif;
+    color: #1E90FF;
 }
+
+/* Блок на вход, выход 
+
+*/
+.divWork {
+    width: 25%;
+    height: 50%;
+    padding: 10px;
+    padding-right: 20px;
+    border: solid 1px #1E90FF;
+    margin: 20px auto;
+    line-height: 2.5;
+    font: 16pt/14pt sans-serif;
+}
+
+/* Кнопки на вход, выход, запуск скрипта
+
+*/
+.refLog {
+  width: 50%;
+}
+
+.regRef {
+    font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */ 
+    font-size: 60%; /* Размер шрифта в процентах */ 
+} 

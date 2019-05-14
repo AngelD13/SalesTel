@@ -1,6 +1,7 @@
 <?php
 	require_once 'form/form.header.php';
-	session_start();
+	require_once 'src/function.ses.php';
+
 	// Тут выполняется подключение к базе данных
 	$pdo = new PDO('mysql:host=localhost;dbname=salestel;charset=utf8', 'root', '');
 	$pdo->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -9,52 +10,42 @@
 	if (!empty($_POST['pass']) and !empty($_POST['login'])) {
 		
 		// Пишем логин и пароль из формы в переменные для удобства работы:
-		$login = $_POST['login'];
-		$pass = $_POST['pass'];
+		$login = $_REQUEST['login'];
+		$pass = $_REQUEST['pass'];
+
 		
 		// Формируем и отсылаем SQL запрос:
-		// $query = "";
-		$stmt = $pdo->query("SELECT * FROM users WHERE login='".$login."' AND pass='".$pass."'");
-		
-		// Преобразуем ответ из БД в нормальный массив PHP:
+		$stmt = $pdo->query("SELECT * FROM users WHERE login='".$login."'");
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 		
 		if (!empty($user)) {
-			// Пользователь прошел авторизацию
-			echo "Вы успешно аторизированы ".$_POST['login'];
-			$_SESSION['auth'] = true;
-			$_SESSION['login'] = $login;
-			header("refresh: 3; url=http://localhost/SalesTel/index.php");
-  			exit;
+			// Получаем соль
+			$salt = $user['salt'];
+			// Солим
+			$saltedPass = md5($pass.$salt);
+			
+			if ($user['pass'] == $saltedPass)
+			{
+				session_start();
+				// Пользователь прошел авторизацию
+				echo "Вы успешно аторизированы ".$_POST['login'];
+				$_SESSION['auth'] = true;
+				$_SESSION['login'] = $login;
+				$_SESSION['id'] = $user['id']; 
+				header("refresh: 3; url=http://localhost/SalesTel/index.php");
+	  			exit;
+	  		} else {
+	  			echo "Вы ввели не верный пароль";
+	  			header("refresh: 3; url=http://localhost/SalesTel/login.php");
+	  		}
 		} else {
 			// Пользователь неверно ввел логыин или пароль
-			echo "Вы не правильно ввели данные, или являетесь незарегистрированным пользователем. Попробуйте еще раз.";
+			echo "Нет такого логина. Попробуйте еще раз.";
 			header("refresh: 3; url=http://localhost/SalesTel/login.php");
   			exit;
 		}
 	}
-?>
 
-<!-- Форма входа-->
-<div class="container">
-	<section>
-
-		<form action="" method="POST">
-			<h1>Форма входа</h1>
-			<div>
-					<input type="text" placeholder="Username" required="" id="username" name="login" />
-			</div>
-			<div>
-					<input type="password" placeholder="Password" required="" id="password" name="pass" />
-			</div>
-			<div>
-				<input type="submit" value="Отправить">
-			</div>
-		</form>
-
-	</section>
-</div>
-
-<?php
+	require_once 'form/form.login.php';
 	require_once 'form/form.footer.php';
 ?>

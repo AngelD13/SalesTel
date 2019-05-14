@@ -27,10 +27,21 @@ CREATE TABLE IF NOT EXISTS la_answer (
 CREATE TABLE IF NOT EXISTS users (
 	id INT AUTO_INCREMENT NOT NULL,
  	login VARCHAR(20), /* логин, совпадает с логином Windows */
- 	pass VARCHAR(20), /* Пароль */
+ 	pass VARCHAR(255), /* Пароль */
+ 	salt VARCHAR(255), /* Соль для пароля */
  	name VARCHAR(20), /* Отображаемое имя */
  	email VARCHAR(255) UNIQUE, /* Почта */
- 	PRIMARY KEY (id)
+ 	reg_date DATE,
+ 	users_rights TINYINT(10) DEFAULT '0', /* Права пользователя, 0 - просмотр */
+ 	PRIMARY KEY (id),
+ 	FOREIGN KEY (users_rights) REFERENCES users_rights(id)
+) ENGINE=InnoDB CHARACTER SET=UTF8;
+
+CREATE TABLE IF NOT EXISTS users_rights (
+	id TINYINT(10),
+ 	rights VARCHAR(10),
+ 	note VARCHAR(255),
+ 	PRIMARY KEY(id)
 ) ENGINE=InnoDB CHARACTER SET=UTF8;
 
 
@@ -47,11 +58,12 @@ VALUES (NULL, 1, 4, 'Да', NULL), (NULL, 1, 3, 'Нет', NULL), (NULL, 4, 5, '�
 (NULL, 6, 1, 'Пробуем', 'Возвращаемся на ID1'), (NULL, 3, NULL, 'Зря ты так', 'Последняя ветка');
 
 /*  Вводим пользователей */
-INSERT INTO `users`(`login`, `pass`, `name`, `email`) VALUES ('yekorotin', '12345678', 'Евгений', 'yekorotin@ukrtelecom.ua'), 
-('mobuhovskiy', '12345678', 'Максим', 'mobuhovskiy@ukrtelecom.ua'), ('pgrygoryev', '12345678', 'Павел', 'pgrygoryev@ukrtelecom.ua'), 
-('angel', '12345678', 'Евгений', 'stang8@ukr.net'), ('root', '12345678', 'Admin', 'angel@mirnew.net');
+INSERT INTO `users`(`login`, `pass`, `salt`, `name`, `email`, `users_rights`) VALUES 
+('root', 'e0803b698c14bc585988df3c19e34008', 'dX_,.(g4', 'Admin', 'angel@mirnew.net', 0);
 
-
+/*  Права пользователей */
+INSERT INTO `users_rights`(`id`, `rights`, `note`) VALUES (0, 'view', 'Только просмотр'),
+(1, 'user', 'Права на работу с программой'), (9, 'admin', 'Super user');
 
 /* Выборка вопроса и ответов на него*/
 SELECT question.a, answer.b

@@ -8,23 +8,9 @@
 	if (isset($_SESSION['auth']))
 	{
 		echo "Рады вашему посещению ".$_SESSION['login'];
-		echo "<div>";
-		echo "<a href=\"page.php\">Начинаем продажи</a>";
-		echo "</div>";
-		echo "<div>";
-		echo "<a href=\"logout.php\">Выход</a>";
-		echo "</div>";
-
-
-
-
+		require_once 'form/form.work.php';
 	} else {
-		echo "<div>";
-		echo "<a href=\"login.php\">Вход на сайт</a>";
-		echo "</div>";
-		echo "<div>";
-		echo "<a href=\"register.php\">Регистрация</a>";
-		echo "</div>";
+		require_once 'form/form.input.php';
 	}
 
 	require_once 'form/form.footer.php';
